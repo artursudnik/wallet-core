@@ -52,9 +52,9 @@ WORKDIR /wallet-core
 RUN tools/install-dependencies
 
 # Build: generate, cmake, and make lib
-RUN tools/generate-files \
-    && cmake -H. -Bbuild -DCMAKE_BUILD_TYPE=Debug \
-    && make -Cbuild -j12 TrustWalletCore
+RUN tools/generate-files
+RUN cmake -H. -Bbuild -DCMAKE_BUILD_TYPE=Debug
+RUN make -Cbuild -j12 TrustWalletCore
 
 # Build unit tester
 RUN make -Cbuild -j12 tests
