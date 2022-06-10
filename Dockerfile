@@ -1,4 +1,6 @@
-FROM --platform=linux/amd64 ubuntu:20.04
+FROM --platform=linux/amd64 ubuntu:20.04 as base
+
+FROM base as build-environment
 
 ENV DEBIAN_FRONTEND=noninteractive
 
@@ -40,6 +42,8 @@ ENV CXX=/usr/bin/clang++-10
 
 # ↑ Setup build environment
 # ↓ Build and compile wallet core
+
+FROM build-environment as build
 
 RUN git clone https://github.com/trustwallet/wallet-core.git
 WORKDIR /wallet-core
